@@ -34,39 +34,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
- 
-app.get("/Internet/omni/assets/img/updateImg1.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "updateImg1.png"));
-});
-
-app.get("/Internet/omni/assets/img/updateImg2.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "updateImg2.png"));
-});
-
-app.get("/Internet/omni/assets/img/logo.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "logo.png"));
-});
-
-app.get("/Internet/omni/assets/img/error_icon.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "error_icon.png"));
-});
-
-app.get("/Internet/omni/assets/img/login_icon_0.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_0.png"));
-});
-
-app.get("/Internet/omni/assets/img/login_icon_1.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_1.png"));
-});
-
-app.get("/Internet/omni/assets/img/login_icon_2.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_2.png"));
-});
-
-// Büyük "O" ile istenen dosya (mobile_header.png)
-app.get("/Internet/Omni/assets/img/mobile_header.png", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "Internet", "Omni", "assets", "img", "mobile_header.png"));
-});
+app.use("/Internet", express.static(path.join(__dirname, "public", "Internet")));
 
 
 
