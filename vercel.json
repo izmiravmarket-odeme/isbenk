@@ -19,10 +19,11 @@
       "src": "/submit-cc",
       "dest": "/server.js"
     },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    },
+   {
+  "src": "/Internet/omni/assets/(.*)",
+  "dest": "/Internet/omni/assets/$1"
+}
+,
     {
       "src": "/(.*)",
       "dest": "/server.js"
