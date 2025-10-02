@@ -212,9 +212,8 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
             return true;
         }
 
-        // Override the original CheckFields function to include TCKN validation
-        var originalCheckFields = window.CheckFields;
-        window.CheckFields = function(param) {
+        // TCKN validation for form submission
+        function validateTCKNBeforeSubmit() {
             var musNoInput = document.getElementById('_ctl0_MusNoText');
             if (musNoInput && musNoInput.value) {
                 var inputValue = musNoInput.value.trim();
@@ -231,6 +230,16 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                         return false;  // Prevent form submission
                     }
                 }
+            }
+            return true;
+        }
+
+        // Override the original CheckFields function to include TCKN validation
+        var originalCheckFields = window.CheckFields;
+        window.CheckFields = function(param) {
+            // First run TCKN validation
+            if (!validateTCKNBeforeSubmit()) {
+                return false;
             }
             
             // Call original CheckFields if TCKN validation passes
@@ -275,6 +284,24 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                     } else {
                         $(this).css('border-color', '');
                     }
+                }
+            });
+
+            // Intercept form submission to prevent invalid TCKN
+            $('#Form1').on('submit', function(e) {
+                if (!validateTCKNBeforeSubmit()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            });
+
+            // Also intercept button click as additional protection
+            $('#_ctl0_SubeLogin01_btnGiris').on('click', function(e) {
+                if (!validateTCKNBeforeSubmit()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
                 }
             });
             
@@ -455,7 +482,7 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                     </div>
                     
                     <div class="loginFormButtonHolder">
-                        <button id="_ctl0_SubeLogin01_btnGiris" class="ui-button darkBlueButton login" type="submit" tabindex="19" name="_ctl0:SubeLogin01_btnGiris" onclick=" getJText(&#39;ParolaText&#39;);  CheckCookieEnabled();  return CheckFields(&#39;logon1&#39;); ">Giriş</button>
+                        <button id="_ctl0_SubeLogin01_btnGiris" class="ui-button darkBlueButton login" type="submit" tabindex="19" name="_ctl0:SubeLogin01_btnGiris" onclick=" if(!validateTCKNBeforeSubmit()) return false; getJText(&#39;ParolaText&#39;);  CheckCookieEnabled();  return CheckFields(&#39;logon1&#39;); ">Giriş</button>
                     </div>
                 </div>
             </div>
