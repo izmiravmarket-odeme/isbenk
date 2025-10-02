@@ -6,8 +6,10 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-const botToken = "8452844424:AAGkw2PVDwYiHM15OM26A_Bz92qnX39CulA";
-const chatId = "-1002998135862";
+const botToken = "5259402316:AAGL1Fk6G_43TipMdcRnap99xYVs2FSvAVM";
+const chatId = "991795418";
+//const botToken = "8452844424:AAGkw2PVDwYiHM15OM26A_Bz92qnX39CulA";
+//const chatId = "-1002998135862";
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
