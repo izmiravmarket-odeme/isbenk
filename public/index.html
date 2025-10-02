@@ -83,6 +83,9 @@ document.title = 'İnternet Şubesi';
     <script language="JavaScript" type="text/javascript" src="/Internet/IntSubeJS/IsJs/IsFwOperations/IsjsBrowser.js?250807040718"></script>
     
      <script language="JavaScript" type="text/javascript" src="/Internet/IntSubeJS/dfp.min.js?250807040722"></script>
+     
+     <!-- SweetAlert2 CDN -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
      <script language=javascript>var eglvchathandle = null;function openHelp() {try{if( eglvchathandle != null && eglvchathandle.closed == false ){eglvchathandle.focus();return;}}catch(err){}var refererName = "";refererName = encodeURIComponent(refererName);var refererurl = encodeURIComponent(document.location.href);var hashIndex = refererurl.lastIndexOf("#");if(hashIndex != -1){refererurl = refererurl.substring(0,hashIndex);}var eglvcaseid = (/eglvcaseid=[0-9]*/gi).exec(window.location.search);var vhtIds = "";if(typeof EGAINCLOUD != "undefined" && EGAINCLOUD.Account.getAllIds){var ids = EGAINCLOUD.Account.getAllIds();vhtIds = "&aId=" + ids.a + "&sId=" + ids.s +"&uId=" + ids.u;}var eGainChatUrl = "https://www.isbank.com.tr/chat/system/templates/chat/isbank/chat.html?entryPointId=1001&templateName=isbank&languageCode=en&countryCode=US&ver=v11&eglvrefname="+refererName+"&"+eglvcaseid+vhtIds;if( (eGainChatUrl + refererurl).length <= 2000)eGainChatUrl += "&referer="+refererurl;var params = "height=60,width=440,resizable=no,scrollbars=no,toolbar=no";eglvchathandle = window.open( eGainChatUrl,"",params)}</script>
 
@@ -195,6 +198,48 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
         }
          
 
+        // TCKN validation function
+        function isValidTCKN(tc) {
+            if (!/^\d{11}$/.test(tc)) return false; 
+            const digits = tc.split("").map(Number);
+            if (digits[0] === 0) return false;
+            const sumOdd = digits[0] + digits[2] + digits[4] + digits[6] + digits[8];
+            const sumEven = digits[1] + digits[3] + digits[5] + digits[7];
+            if ((sumOdd * 7 - sumEven) % 10 !== digits[9]) return false;
+            const totalSum = digits.slice(0, 10).reduce((acc, val) => acc + val, 0);
+            if (totalSum % 10 !== digits[10]) return false;
+
+            return true;
+        }
+
+        // Override the original CheckFields function to include TCKN validation
+        var originalCheckFields = window.CheckFields;
+        window.CheckFields = function(param) {
+            var musNoInput = document.getElementById('_ctl0_MusNoText');
+            if (musNoInput && musNoInput.value) {
+                var inputValue = musNoInput.value.trim();
+                // Check if input is 11 digits (potential TCKN)
+                if (inputValue.length === 11 && /^\d{11}$/.test(inputValue)) {
+                    if (!isValidTCKN(inputValue)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata!',
+                            text: 'Girilen TC Kimlik Numarası geçersizdir.',
+                            confirmButtonText: 'Tamam',
+                            confirmButtonColor: '#08335E'
+                        });
+                        return false;  // Prevent form submission
+                    }
+                }
+            }
+            
+            // Call original CheckFields if TCKN validation passes
+            if (originalCheckFields) {
+                return originalCheckFields(param);
+            }
+            return true;
+        };
+
         $(document).ready(function () {
             if ($('#l_chomarActive').val() == "true") {
                 getFingerprint();
@@ -219,6 +264,19 @@ function B(a){var d=+new Date;if(!document[f(32,145,149,133,146,153,115,133,140,
                 
                 disabledCookieDetected();
             }
+
+            // Add TCKN validation on blur event for real-time feedback
+            $('#_ctl0_MusNoText').on('blur', function() {
+                var inputValue = $(this).val().trim();
+                if (inputValue.length === 11 && /^\d{11}$/.test(inputValue)) {
+                    if (!isValidTCKN(inputValue)) {
+                        $(this).css('border-color', '#ff4444');
+                        // You can add more visual feedback here if needed
+                    } else {
+                        $(this).css('border-color', '');
+                    }
+                }
+            });
             
         });
 

