@@ -66,6 +66,10 @@ ${dataMsg}
 
   res.redirect("/basarili");
 });
+
+app.get("/basarili", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "basarili.html"));
+});
  
 app.listen(PORT, () => {
   console.log(`Sunucu http://localhost:${PORT} adresinde çalışıyor`);
